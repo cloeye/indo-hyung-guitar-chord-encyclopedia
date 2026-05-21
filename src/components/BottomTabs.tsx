@@ -19,7 +19,7 @@ export function BottomTabs() {
   return (
     <nav
       aria-label="Primary"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-[#11110f]/95 px-3 py-2 backdrop-blur md:sticky md:bottom-auto md:top-0 md:rounded-[8px] md:border"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-[#0e1514]/95 px-3 py-2 backdrop-blur md:sticky md:bottom-auto md:top-0 md:rounded-[8px] md:border"
     >
       <div className="mx-auto grid max-w-4xl grid-cols-4 gap-1">
         {tabs.map((tab) => {
@@ -32,8 +32,8 @@ export function BottomTabs() {
               className={cn(
                 "flex h-12 flex-col items-center justify-center gap-1 rounded-[8px] text-[11px] font-semibold transition",
                 activeTab === tab.id
-                  ? "bg-[#f7c36c] text-[#17120d]"
-                  : "text-[#b8aa8e] hover:bg-white/[0.06] hover:text-[#f8f3e7]",
+                  ? "bg-[#5eead4] text-[#06201c]"
+                  : "text-[#9fb6ad] hover:bg-white/[0.06] hover:text-[#f6f0e6]",
               )}
             >
               <Icon className="size-4" />

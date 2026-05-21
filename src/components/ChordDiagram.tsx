@@ -46,7 +46,7 @@ export function ChordDiagram({
   return (
     <div
       className={cn(
-        "relative w-full rounded-[8px] border border-[#eef20c] bg-[#10100f] text-[#252019] shadow-[0_0_0_1px_rgba(255,255,255,0.12)]",
+        "relative w-full rounded-[8px] border border-[#5eead4]/70 bg-[#111817] text-[#252019] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
         isCompact ? "p-1" : "p-2",
         className,
       )}
@@ -65,7 +65,7 @@ export function ChordDiagram({
           y={gridY}
           width={5 * stringGap}
           height={fretCount * fretGap}
-          fill="#fafafa"
+          fill="#fbfaf6"
         />
 
         {voicing.startFret > 1 ? (
@@ -104,7 +104,7 @@ export function ChordDiagram({
               x2={gridX + 5 * stringGap}
               y1={y}
               y2={y}
-              stroke={index === 0 ? "#d8d8d8" : "#caa83a"}
+              stroke={index === 0 ? "#d8d8d8" : "#d98b75"}
               strokeWidth={index === 0 ? nutWidth : 1.8}
               strokeLinecap="round"
             />
@@ -118,7 +118,7 @@ export function ChordDiagram({
             width={Math.abs(barre.x2 - barre.x1) + 24}
             height={22}
             rx={11}
-            fill="#9b9b9b"
+            fill="#64706d"
             opacity={0.5}
           />
         ) : null}
@@ -166,8 +166,8 @@ export function ChordDiagram({
                 cx={x}
                 cy={y}
                 r={13.5}
-                fill={isRoot ? "#cfedfb" : "#f1f1f1"}
-                stroke={isRoot ? "#65bce0" : "#8f8f8f"}
+                fill={isRoot ? "#d9fff7" : "#f4f0e9"}
+                stroke={isRoot ? "#2dd4bf" : "#918c84"}
                 strokeWidth={isRoot ? 3 : 2}
               />
               {finger !== "x" && finger !== 0 ? (
@@ -177,7 +177,7 @@ export function ChordDiagram({
                   textAnchor="middle"
                   className={cn(
                     "text-[13px] font-bold",
-                    isRoot ? "fill-[#2d8db3]" : "fill-[#1d1d1d]",
+                    isRoot ? "fill-[#08786c]" : "fill-[#1d1d1d]",
                   )}
                 >
                   {finger}
@@ -196,7 +196,7 @@ export function ChordDiagram({
               x={getStringX(index, isLeftHanded)}
               y={bottomY + 30}
               textAnchor="middle"
-              className="chord-string-number fill-[#b9eeee] text-[11px] font-semibold"
+              className="chord-string-number fill-[#8ee8dc] text-[11px] font-semibold"
             >
               {stringNumber}
             </text>

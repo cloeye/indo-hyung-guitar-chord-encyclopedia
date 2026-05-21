@@ -40,17 +40,17 @@ function ToggleRow({
     <button
       type="button"
       onClick={onClick}
-      className="flex min-h-14 w-full items-center justify-between gap-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-3 text-left transition hover:border-[#f7c36c]/50"
+      className="flex min-h-14 w-full items-center justify-between gap-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-3 text-left transition hover:border-[#5eead4]/50"
     >
       <span className="flex min-w-0 items-center gap-3">
-        <span className="grid size-9 shrink-0 place-items-center rounded-[8px] bg-white/[0.06] text-[#e6d7b7]">
+        <span className="grid size-9 shrink-0 place-items-center rounded-[8px] bg-white/[0.06] text-[#efe8dd]">
           <Icon className="size-4" />
         </span>
-        <span className="text-sm font-semibold text-[#f8f3e7]">{label}</span>
+        <span className="text-sm font-semibold text-[#f6f0e6]">{label}</span>
       </span>
       <span
         className={`relative h-7 w-12 shrink-0 rounded-full border transition ${
-          value ? "border-[#8fc8b6] bg-[#8fc8b6]" : "border-white/10 bg-black/30"
+          value ? "border-[#5eead4] bg-[#5eead4]" : "border-white/10 bg-black/30"
         }`}
         aria-hidden="true"
       >
@@ -208,14 +208,14 @@ function GoogleImageSearchEmbed({
   url: string;
 }) {
   return (
-    <div className="overflow-hidden rounded-[8px] border border-white/10 bg-[#10100f]">
+    <div className="overflow-hidden rounded-[8px] border border-white/10 bg-[#111817]">
       <div className="flex items-center justify-between gap-2 border-b border-white/10 bg-white/[0.04] px-3 py-2">
-        <p className="min-w-0 truncate text-sm font-semibold text-[#f8f3e7]">
+        <p className="min-w-0 truncate text-sm font-semibold text-[#f6f0e6]">
           {chordName} 이미지 검색
         </p>
         <a
           href={url}
-          className="inline-flex h-8 shrink-0 items-center gap-1 rounded-[7px] border border-white/10 bg-white/[0.06] px-2 text-xs font-semibold text-[#e6d7b7] transition hover:border-[#eef20c]/60"
+          className="inline-flex h-8 shrink-0 items-center gap-1 rounded-[7px] border border-white/10 bg-white/[0.06] px-2 text-xs font-semibold text-[#efe8dd] transition hover:border-[#5eead4]/60"
         >
           현재 탭
           <ChevronRight className="size-3.5" />
@@ -319,12 +319,12 @@ export function ChordFinderApp() {
   }
 
   return (
-    <div className="min-h-screen bg-[#151615] text-[#f8f3e7]">
+    <div className="min-h-screen bg-[#101614] text-[#f6f0e6]">
       <div className="mx-auto flex min-h-screen w-full max-w-[1380px] flex-col px-3 pb-24 pt-3 sm:px-5 lg:px-6">
-        <header className="overflow-hidden rounded-[8px] border border-white/10 bg-[#191a18] shadow-xl shadow-black/20">
+        <header className="overflow-hidden rounded-[8px] border border-[#5eead4]/20 bg-[#15201e] shadow-xl shadow-black/20">
           <div className="flex flex-col gap-3 px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-4">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="grid size-16 shrink-0 place-items-center rounded-[8px] border border-[#eef20c]/50 bg-[#f8f3e7] p-1 shadow-[0_0_0_1px_rgba(255,255,255,0.16),0_10px_24px_rgba(0,0,0,0.28)]">
+              <div className="grid size-16 shrink-0 place-items-center rounded-[8px] border border-[#ff8a65]/60 bg-[#f6f0e6] p-1 shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_10px_24px_rgba(0,0,0,0.28)]">
                 <Image
                   src="/indo-hyung-icon.jpeg"
                   alt="인도형 아이콘"
@@ -335,20 +335,20 @@ export function ChordFinderApp() {
                 />
               </div>
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8fc8b6]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#ff8a65]">
                   Praise Guitar Chords
                 </p>
-                <h1 className="mt-0.5 text-balance text-xl font-semibold tracking-normal text-[#f8f3e7] sm:text-2xl">
+                <h1 className="mt-0.5 text-balance break-keep text-xl font-semibold tracking-normal text-[#f6f0e6] sm:text-2xl">
                   인도형의 찬양 기타코드 대백과
-                  <span className="ml-1 whitespace-nowrap text-sm font-medium text-[#b9b29f]">
+                  <span className="ml-1 whitespace-nowrap text-sm font-medium text-[#aeb8ad]">
                     (by 전도사닷컴)
                   </span>
                 </h1>
                 <div className="mt-1.5 inline-flex max-w-full items-center gap-2 rounded-[7px] border border-white/10 bg-white/[0.05] px-2.5 py-1">
-                  <span className="shrink-0 text-[10px] font-semibold text-[#a99a7a]">
+                  <span className="shrink-0 text-[10px] font-semibold text-[#92a49b]">
                     현재 코드
                   </span>
-                  <strong className="truncate text-2xl font-semibold leading-none text-[#eef20c]">
+                  <strong className="truncate text-2xl font-semibold leading-none text-[#5eead4]">
                     {chordName}
                   </strong>
                 </div>
@@ -356,15 +356,15 @@ export function ChordFinderApp() {
             </div>
             <div className="grid shrink-0 grid-cols-3 gap-1.5 text-center sm:gap-2">
               <div className="rounded-[7px] bg-white/[0.06] px-2 py-1.5">
-                <p className="text-[10px] font-semibold text-[#a99a7a]">폼</p>
+                <p className="text-[10px] font-semibold text-[#92a49b]">폼</p>
                 <p className="text-sm font-semibold">{voicings.length}</p>
               </div>
               <div className="rounded-[7px] bg-white/[0.06] px-2 py-1.5">
-                <p className="text-[10px] font-semibold text-[#a99a7a]">무료</p>
+                <p className="text-[10px] font-semibold text-[#92a49b]">무료</p>
                 <p className="text-sm font-semibold">{voicingCount}</p>
               </div>
               <div className="rounded-[7px] bg-white/[0.06] px-2 py-1.5">
-                <p className="text-[10px] font-semibold text-[#a99a7a]">프렛</p>
+                <p className="text-[10px] font-semibold text-[#92a49b]">프렛</p>
                 <p className="text-sm font-semibold">{ADVANCED_MAX_FRET}</p>
               </div>
             </div>
@@ -377,14 +377,14 @@ export function ChordFinderApp() {
 
         {activeTab === "forward" ? (
           <main className="mt-4 grid flex-1 grid-cols-[minmax(176px,43%)_minmax(0,57%)] gap-3 lg:grid-cols-[420px_minmax(0,1fr)]">
-            <aside className="h-fit rounded-[8px] border border-white/10 bg-[#111210] p-2 shadow-xl shadow-black/20 lg:sticky lg:top-4">
+            <aside className="h-fit rounded-[8px] border border-white/10 bg-[#0f1715] p-2 shadow-xl shadow-black/20 lg:sticky lg:top-4">
               <form
                 onSubmit={handleDirectSubmit}
-                className="mb-2 rounded-[8px] border border-white/10 bg-black/25 p-2"
+                className="mb-2 rounded-[8px] border border-white/10 bg-[#0b1211]/85 p-2"
               >
                 <label
                   htmlFor="direct-chord-input"
-                  className="text-xs font-semibold uppercase tracking-[0.12em] text-[#f8f3e7]"
+                  className="text-xs font-semibold uppercase tracking-[0.12em] text-[#f6f0e6]"
                 >
                   Direct
                 </label>
@@ -404,19 +404,19 @@ export function ChordFinderApp() {
                       }
                     }}
                     placeholder="Cadd9"
-                    className="min-w-0 flex-1 rounded-[7px] border border-white/10 bg-white/[0.06] px-2 text-[16px] font-semibold text-[#f8f3e7] outline-none transition placeholder:text-[#8b8069] focus:border-[#eef20c]/70"
+                    className="min-w-0 flex-1 rounded-[7px] border border-white/10 bg-white/[0.06] px-2 text-[16px] font-semibold text-[#f6f0e6] outline-none transition placeholder:text-[#7f9188] focus:border-[#5eead4]/70"
                   />
                   <button
                     type="submit"
                     aria-label="입력한 코드 보기"
                     title="입력한 코드 보기"
-                    className="grid size-10 shrink-0 place-items-center rounded-[7px] border border-[#eef20c]/60 bg-[#eef20c] text-[#17120d] transition hover:bg-[#f6ff39]"
+                    className="grid size-10 shrink-0 place-items-center rounded-[7px] border border-[#ff8a65]/70 bg-[#ff8a65] text-[#24100a] transition hover:bg-[#ffa184]"
                   >
                     <Search className="size-4" />
                   </button>
                 </div>
                 {directInputError ? (
-                  <p className="mt-2 text-xs leading-5 text-[#f7c36c]">{directInputError}</p>
+                  <p className="mt-2 text-xs leading-5 text-[#ff8a65]">{directInputError}</p>
                 ) : null}
               </form>
               <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
@@ -427,11 +427,11 @@ export function ChordFinderApp() {
 
             <section className="min-w-0">
               <div className="mb-2 text-center">
-                <p className="text-2xl font-semibold text-[#f8f3e7]">{chordName}</p>
-                <div className="mt-1.5 rounded-[8px] border border-white/30 bg-[#858582] py-0.5 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
+                <p className="text-2xl font-semibold text-[#f6f0e6]">{chordName}</p>
+                <div className="mt-1.5 rounded-[8px] border border-[#5eead4]/30 bg-[#183a36] py-0.5 text-base font-semibold text-[#dffbf5] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
                   Finger
                 </div>
-                <p className="mt-1 text-xs leading-4 text-[#b9b29f]">
+                <p className="mt-1 text-xs leading-4 text-[#aeb8ad]">
                   운지표를 누르면 소리가 납니다.
                 </p>
                 <button
@@ -439,7 +439,7 @@ export function ChordFinderApp() {
                   onClick={() =>
                     setImageSearchChordName((value) => (value === chordName ? undefined : chordName))
                   }
-                  className="mt-1.5 inline-flex h-8 items-center gap-2 rounded-[7px] border border-white/10 bg-white/[0.06] px-2.5 text-xs font-semibold text-[#e6d7b7] transition hover:border-[#eef20c]/60"
+                  className="mt-1.5 inline-flex h-8 items-center gap-2 rounded-[7px] border border-white/10 bg-white/[0.06] px-2.5 text-xs font-semibold text-[#efe8dd] transition hover:border-[#5eead4]/60"
                 >
                   <Search className="size-3.5" />
                   이미지 검색
@@ -464,15 +464,15 @@ export function ChordFinderApp() {
                           <div className="min-w-0">
                             <h2
                               id={`${section.id}-voicings`}
-                              className="text-base font-semibold text-[#f8f3e7]"
+                              className="text-base font-semibold text-[#f6f0e6]"
                             >
                               {section.title}
                             </h2>
-                            <p className="hidden text-[11px] leading-4 text-[#a7a28f] sm:block">
+                            <p className="hidden text-[11px] leading-4 text-[#9fb6ad] sm:block">
                               {section.description}
                             </p>
                           </div>
-                          <span className="rounded-[6px] bg-white/[0.06] px-2 py-0.5 text-xs font-semibold text-[#e6d7b7]">
+                          <span className="rounded-[6px] bg-white/[0.06] px-2 py-0.5 text-xs font-semibold text-[#efe8dd]">
                             {sectionVoicings.length}
                           </span>
                         </div>
@@ -486,14 +486,14 @@ export function ChordFinderApp() {
                   })}
                 </div>
               ) : (
-                <div className="rounded-[8px] border border-white/10 bg-[#181817] p-5">
-                  <div className="grid size-11 place-items-center rounded-[8px] bg-white/[0.06] text-[#eef20c]">
+                <div className="rounded-[8px] border border-white/10 bg-[#17201e] p-5">
+                  <div className="grid size-11 place-items-center rounded-[8px] bg-white/[0.06] text-[#5eead4]">
                     <Search className="size-5" />
                   </div>
-                  <h2 className="mt-4 text-xl font-semibold text-[#f8f3e7]">
+                  <h2 className="mt-4 text-xl font-semibold text-[#f6f0e6]">
                     {chordName} 운지를 바로 찾아볼 수 있습니다
                   </h2>
-                  <p className="mt-2 text-sm leading-6 text-[#d8ccb2]">
+                  <p className="mt-2 text-sm leading-6 text-[#d8d0c0]">
                     앱에 저장된 대표 운지가 없을 때는 아래 검색 결과에서 다른 포지션을
                     확인하세요.
                   </p>
@@ -507,12 +507,12 @@ export function ChordFinderApp() {
         ) : (
           <main className="mt-5 flex-1">
             {activeTab === "reverse" ? (
-              <div className="rounded-[8px] border border-white/10 bg-[#181817] p-6">
-                <div className="grid size-12 place-items-center rounded-[8px] bg-white/[0.06] text-[#8fc8b6]">
+              <div className="rounded-[8px] border border-white/10 bg-[#17201e] p-6">
+                <div className="grid size-12 place-items-center rounded-[8px] bg-white/[0.06] text-[#5eead4]">
                   <RotateCcw className="size-5" />
                 </div>
-                <h2 className="mt-4 text-2xl font-semibold text-[#f8f3e7]">Reverse</h2>
-                <p className="mt-2 text-sm leading-6 text-[#d8ccb2]">
+                <h2 className="mt-4 text-2xl font-semibold text-[#f6f0e6]">Reverse</h2>
+                <p className="mt-2 text-sm leading-6 text-[#d8d0c0]">
                   직접 누른 운지로 코드명을 찾는 기능은 준비 중입니다.
                 </p>
                 <div className="mt-5 grid grid-cols-6 gap-2">
@@ -521,7 +521,7 @@ export function ChordFinderApp() {
                       key={`${stringName}-${index}`}
                       type="button"
                       disabled
-                      className="h-16 rounded-[8px] border border-dashed border-white/10 bg-white/[0.03] text-sm font-semibold text-[#8b8069]"
+                      className="h-16 rounded-[8px] border border-dashed border-white/10 bg-white/[0.03] text-sm font-semibold text-[#7f9188]"
                     >
                       {stringName}
                     </button>
@@ -532,12 +532,12 @@ export function ChordFinderApp() {
 
             {activeTab === "memo" ? (
               <div className="grid gap-4 xl:grid-cols-2">
-                <section className="rounded-[8px] border border-white/10 bg-[#181817] p-5">
+                <section className="rounded-[8px] border border-white/10 bg-[#17201e] p-5">
                   <div className="flex items-center gap-3">
-                    <div className="grid size-10 place-items-center rounded-[8px] bg-[#eef20c] text-[#17120d]">
+                    <div className="grid size-10 place-items-center rounded-[8px] bg-[#ff8a65] text-[#24100a]">
                       <Star className="size-5" />
                     </div>
-                    <h2 className="text-xl font-semibold text-[#f8f3e7]">즐겨찾기</h2>
+                    <h2 className="text-xl font-semibold text-[#f6f0e6]">즐겨찾기</h2>
                   </div>
                   <div className="mt-4 grid gap-2">
                     {favorites.length > 0 ? (
@@ -546,26 +546,26 @@ export function ChordFinderApp() {
                           key={favorite}
                           type="button"
                           onClick={() => selectChordName(favorite)}
-                          className="flex h-12 items-center justify-between rounded-[8px] border border-white/10 bg-white/[0.04] px-3 text-left font-semibold text-[#f8f3e7] transition hover:border-[#eef20c]/50"
+                          className="flex h-12 items-center justify-between rounded-[8px] border border-white/10 bg-white/[0.04] px-3 text-left font-semibold text-[#f6f0e6] transition hover:border-[#ff8a65]/50"
                         >
                           {favorite}
-                          <ChevronRight className="size-4 text-[#a99a7a]" />
+                          <ChevronRight className="size-4 text-[#92a49b]" />
                         </button>
                       ))
                     ) : (
-                      <p className="rounded-[8px] bg-white/[0.04] p-3 text-sm text-[#d8ccb2]">
+                      <p className="rounded-[8px] bg-white/[0.04] p-3 text-sm text-[#d8d0c0]">
                         아직 저장된 코드가 없습니다.
                       </p>
                     )}
                   </div>
                 </section>
 
-                <section className="rounded-[8px] border border-white/10 bg-[#181817] p-5">
+                <section className="rounded-[8px] border border-white/10 bg-[#17201e] p-5">
                   <div className="flex items-center gap-3">
-                    <div className="grid size-10 place-items-center rounded-[8px] bg-[#8fc8b6] text-[#101817]">
+                    <div className="grid size-10 place-items-center rounded-[8px] bg-[#5eead4] text-[#06201c]">
                       <BookOpen className="size-5" />
                     </div>
-                    <h2 className="text-xl font-semibold text-[#f8f3e7]">최근 본 코드</h2>
+                    <h2 className="text-xl font-semibold text-[#f6f0e6]">최근 본 코드</h2>
                   </div>
                   <div className="mt-4 grid gap-2">
                     {recent.map((item) => (
@@ -573,10 +573,10 @@ export function ChordFinderApp() {
                         key={item}
                         type="button"
                         onClick={() => selectChordName(item)}
-                        className="flex h-12 items-center justify-between rounded-[8px] border border-white/10 bg-white/[0.04] px-3 text-left font-semibold text-[#f8f3e7] transition hover:border-[#8fc8b6]/50"
+                        className="flex h-12 items-center justify-between rounded-[8px] border border-white/10 bg-white/[0.04] px-3 text-left font-semibold text-[#f6f0e6] transition hover:border-[#5eead4]/50"
                       >
                         {item}
-                        <ChevronRight className="size-4 text-[#a99a7a]" />
+                        <ChevronRight className="size-4 text-[#92a49b]" />
                       </button>
                     ))}
                   </div>
@@ -585,17 +585,17 @@ export function ChordFinderApp() {
             ) : null}
 
             {activeTab === "settings" ? (
-              <div className="rounded-[8px] border border-white/10 bg-[#181817] p-5">
+              <div className="rounded-[8px] border border-white/10 bg-[#17201e] p-5">
                 <div className="flex items-center gap-3">
-                  <div className="grid size-10 place-items-center rounded-[8px] bg-white/[0.06] text-[#eef20c]">
+                  <div className="grid size-10 place-items-center rounded-[8px] bg-white/[0.06] text-[#5eead4]">
                     <Settings2 className="size-5" />
                   </div>
-                  <h2 className="text-xl font-semibold text-[#f8f3e7]">Setting</h2>
+                  <h2 className="text-xl font-semibold text-[#f6f0e6]">Setting</h2>
                 </div>
                 <div className="mt-5 grid gap-3">
                   <div className="rounded-[8px] border border-white/10 bg-white/[0.04] p-3">
-                    <p className="text-sm font-semibold text-[#f8f3e7]">손가락 번호 표시</p>
-                    <p className="mt-1 text-xs leading-5 text-[#b9b29f]">
+                    <p className="text-sm font-semibold text-[#f6f0e6]">손가락 번호 표시</p>
+                    <p className="mt-1 text-xs leading-5 text-[#aeb8ad]">
                       운지표에는 항상 손가락 번호가 표시됩니다.
                     </p>
                   </div>
@@ -606,8 +606,8 @@ export function ChordFinderApp() {
                     icon={SlidersHorizontal}
                   />
                   <div className="rounded-[8px] border border-white/10 bg-white/[0.04] p-3">
-                    <p className="text-sm font-semibold text-[#f8f3e7]">고급 운지</p>
-                    <p className="mt-1 text-xs leading-5 text-[#b9b29f]">
+                    <p className="text-sm font-semibold text-[#f6f0e6]">고급 운지</p>
+                    <p className="mt-1 text-xs leading-5 text-[#aeb8ad]">
                       10프렛 초과 포지션은 결과 화면의 고급 운지 섹션에 항상 표시됩니다.
                     </p>
                   </div>

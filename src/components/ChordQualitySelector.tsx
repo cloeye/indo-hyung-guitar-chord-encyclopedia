@@ -37,12 +37,12 @@ export function ChordQualitySelector() {
   return (
     <section aria-labelledby="quality-heading">
       <div className="flex items-center justify-between gap-2">
-        <h2 id="quality-heading" className="text-xs font-semibold uppercase tracking-[0.12em] text-[#f8f3e7]">
+        <h2 id="quality-heading" className="text-xs font-semibold uppercase tracking-[0.12em] text-[#f6f0e6]">
           Quality
         </h2>
       </div>
 
-      <div className="mt-2 grid grid-cols-3 gap-1 rounded-[8px] border border-white/10 bg-black/25 p-1">
+      <div className="mt-2 grid grid-cols-3 gap-1 rounded-[8px] border border-white/10 bg-[#0c1413]/70 p-1">
         {qualityTabs.map((tab) => (
           <button
             key={tab}
@@ -51,8 +51,8 @@ export function ChordQualitySelector() {
             className={cn(
               "h-8 rounded-[6px] px-1 text-[10px] font-semibold transition",
               activeTab === tab
-                ? "bg-[#8a8a86] text-white"
-                : "text-[#b8aa8e] hover:bg-white/[0.06] hover:text-[#f8f3e7]",
+                ? "bg-[#5eead4] text-[#06201c]"
+                : "text-[#9fb6ad] hover:bg-white/[0.06] hover:text-[#f6f0e6]",
             )}
           >
             {qualityTabLabels[tab]}
@@ -68,16 +68,16 @@ export function ChordQualitySelector() {
             onClick={() => setQualityId(quality.id)}
             title={quality.shortDescription}
             className={cn(
-              "relative h-10 min-w-0 overflow-hidden rounded-[7px] border px-1 text-center text-black shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_3px_rgba(0,0,0,0.2)] transition active:translate-y-px",
+              "relative h-10 min-w-0 overflow-hidden rounded-[7px] border px-1 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition active:translate-y-px",
               selectedQualityId === quality.id
-                ? "border-[#f3ff50] bg-[linear-gradient(#f6ff39,#efff51_48%,#cfd34d)]"
-                : "border-[#d7d8b5] bg-[linear-gradient(#f8f8f0,#fbfbfb_47%,#cfd1ac)] hover:border-[#f3ff50]",
+                ? "border-[#5eead4] bg-[#123c38] text-[#eafff8] shadow-[0_0_0_1px_rgba(94,234,212,0.18),inset_0_1px_0_rgba(255,255,255,0.08)]"
+                : "border-white/10 bg-[#202725] text-[#efe8dd] hover:border-[#5eead4]/55 hover:bg-[#263431]",
             )}
           >
             <span className="block truncate text-sm font-semibold leading-4">
               {quality.displayName}
             </span>
-            <span className="mt-0.5 block truncate text-[9px] font-semibold leading-3 text-black/45">
+            <span className="mt-0.5 block truncate text-[9px] font-semibold leading-3 text-current opacity-70">
               {difficultyLabel(quality.difficulty)}
             </span>
           </button>

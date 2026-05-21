@@ -43,7 +43,7 @@ export function ModeSelector() {
 
   return (
     <section aria-labelledby="mode-heading">
-      <h2 id="mode-heading" className="text-xs font-semibold uppercase tracking-[0.12em] text-[#f8f3e7]">
+      <h2 id="mode-heading" className="text-xs font-semibold uppercase tracking-[0.12em] text-[#f6f0e6]">
         Mode
       </h2>
       <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -57,8 +57,8 @@ export function ModeSelector() {
               className={cn(
                 "flex min-h-11 items-center gap-2 rounded-[8px] border px-2 py-2 text-left transition",
                 selectedMode === mode.id
-                  ? "border-[#8fc8b6] bg-[#8fc8b6] text-[#101817]"
-                  : "border-white/10 bg-white/[0.04] text-[#e6d7b7] hover:border-[#8fc8b6]/60 hover:bg-white/[0.07]",
+                  ? "border-[#5eead4] bg-[#5eead4] text-[#06201c]"
+                  : "border-white/10 bg-white/[0.04] text-[#efe8dd] hover:border-[#5eead4]/60 hover:bg-white/[0.07]",
               )}
             >
               <span

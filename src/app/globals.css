@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f100e;
-  --foreground: #f8f3e7;
+  --background: #101614;
+  --foreground: #f6f0e6;
 }
 
 @theme inline {
@@ -23,8 +23,8 @@ html {
 body {
   min-height: 100vh;
   background:
-    linear-gradient(120deg, rgba(143, 200, 182, 0.08), transparent 36rem),
-    linear-gradient(240deg, rgba(224, 122, 63, 0.08), transparent 32rem), var(--background);
+    linear-gradient(120deg, rgba(45, 212, 191, 0.09), transparent 34rem),
+    linear-gradient(240deg, rgba(255, 138, 101, 0.08), transparent 30rem), var(--background);
   color: var(--foreground);
   font-family: "Apple SD Gothic Neo", "Malgun Gothic", ui-sans-serif, system-ui, sans-serif;
 }
@@ -45,6 +45,6 @@ button:disabled {
 }
 
 ::selection {
-  background: #f7c36c;
-  color: #17120d;
+  background: #5eead4;
+  color: #06201c;
 }
