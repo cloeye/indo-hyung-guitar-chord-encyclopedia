@@ -18,7 +18,7 @@ export function VoicingCard({ voicing, index }: VoicingCardProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const isLeftHanded = useChordStore((state) => state.isLeftHanded);
   const favorites = useChordStore((state) => state.favorites);
-  const toggleFavorite = useChordStore((state) => state.toggleFavorite);
+  const toggleFavoriteVoicing = useChordStore((state) => state.toggleFavoriteVoicing);
   const isFavorite = favorites.includes(voicing.chordName);
 
   async function handlePlay() {
@@ -67,7 +67,7 @@ export function VoicingCard({ voicing, index }: VoicingCardProps) {
           </button>
           <button
             type="button"
-            onClick={() => toggleFavorite(voicing.chordName)}
+            onClick={() => toggleFavoriteVoicing(voicing)}
             aria-label={isFavorite ? "즐겨찾기 해제" : "즐겨찾기 추가"}
             title={isFavorite ? "즐겨찾기 해제" : "즐겨찾기 추가"}
             className={cn(

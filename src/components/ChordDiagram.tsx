@@ -4,8 +4,10 @@ import type { ChordVoicing } from "@/types/chord";
 type ChordDiagramProps = {
   voicing: ChordVoicing;
   isLeftHanded: boolean;
-  size?: "default" | "compact";
+  size?: "default" | "compact" | "large";
   className?: string;
+  onFretSelect?: (stringIndex: number, fret: number) => void;
+  onFingerSelect?: (stringIndex: number) => void;
 };
 
 const width = 236;
@@ -30,10 +32,15 @@ export function ChordDiagram({
   isLeftHanded,
   size = "default",
   className,
+  onFretSelect,
+  onFingerSelect,
 }: ChordDiagramProps) {
   const bottomY = gridY + fretCount * fretGap;
   const nutWidth = voicing.startFret === 1 ? 7 : 2;
   const isCompact = size === "compact";
+  const isLarge = size === "large";
+  const isInteractive = typeof onFretSelect === "function";
+  const isFingerEditable = typeof onFingerSelect === "function";
 
   const barre = voicing.barre
     ? {
@@ -47,7 +54,7 @@ export function ChordDiagram({
     <div
       className={cn(
         "relative w-full rounded-[8px] border border-[#5eead4]/70 bg-[#111817] text-[#252019] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
-        isCompact ? "p-1" : "p-2",
+        isCompact ? "p-1" : isLarge ? "p-3" : "p-2",
         className,
       )}
     >
@@ -57,7 +64,7 @@ export function ChordDiagram({
         aria-label={`${voicing.chordName} chord diagram`}
         className={cn(
           "mx-auto block aspect-[236/272] w-full",
-          isCompact ? "max-w-[174px]" : "max-w-[236px]",
+          isCompact ? "max-w-[174px]" : isLarge ? "max-w-[340px]" : "max-w-[236px]",
         )}
       >
         <rect
@@ -202,6 +209,68 @@ export function ChordDiagram({
             </text>
           );
         })}
+
+        {isInteractive ? (
+          <g aria-label="지판 프렛 입력">
+            {Array.from({ length: 6 }).map((_, stringIndex) =>
+              Array.from({ length: fretCount }).map((__, fretIndex) => {
+                const fret = voicing.startFret + fretIndex;
+                const x = getStringX(stringIndex, isLeftHanded) - stringGap / 2;
+                const y = gridY + fretIndex * fretGap;
+
+                return (
+                  <rect
+                    key={`hit-${stringIndex}-${fret}`}
+                    x={x}
+                    y={y}
+                    width={stringGap}
+                    height={fretGap}
+                    fill="transparent"
+                    data-fret-input={`${stringIndex}-${fret}`}
+                    className="cursor-pointer"
+                    onClick={() => onFretSelect(stringIndex, fret)}
+                  >
+                    <title>
+                      {6 - stringIndex}번 줄 {fret}프렛 입력
+                    </title>
+                  </rect>
+                );
+              }),
+            )}
+          </g>
+        ) : null}
+
+        {isFingerEditable ? (
+          <g aria-label="손가락 번호 입력">
+            {voicing.frets.map((fret, stringIndex) => {
+              if (fret === "x" || fret === 0) {
+                return null;
+              }
+
+              const localFret = fret - voicing.startFret + 1;
+              const x = getStringX(stringIndex, isLeftHanded);
+              const y = gridY + (localFret - 0.5) * fretGap;
+
+              return (
+                <circle
+                  key={`finger-hit-${stringIndex}`}
+                  cx={x}
+                  cy={y}
+                  r={18}
+                  fill="transparent"
+                  data-finger-input={stringIndex}
+                  className="cursor-pointer"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onFingerSelect(stringIndex);
+                  }}
+                >
+                  <title>{6 - stringIndex}번 줄 손가락 번호 변경</title>
+                </circle>
+              );
+            })}
+          </g>
+        ) : null}
       </svg>
     </div>
   );

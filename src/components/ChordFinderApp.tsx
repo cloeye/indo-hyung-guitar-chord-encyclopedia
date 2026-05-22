@@ -5,15 +5,17 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import {
   BookOpen,
   ChevronRight,
-  RotateCcw,
   Search,
   Settings2,
   SlidersHorizontal,
   Star,
+  Trash2,
 } from "lucide-react";
 import { BottomTabs } from "@/components/BottomTabs";
+import { ChordDiagram } from "@/components/ChordDiagram";
 import { ChordQualitySelector } from "@/components/ChordQualitySelector";
 import { ChordRootSelector } from "@/components/ChordRootSelector";
+import { ReverseChordFinder } from "@/components/ReverseChordFinder";
 import { VoicingCard } from "@/components/VoicingCard";
 import { chordQualities, getQualityTab } from "@/data/chordQualities";
 import { chordRoots } from "@/data/chordRoots";
@@ -236,10 +238,12 @@ export function ChordFinderApp() {
   const [directInput, setDirectInput] = useState("");
   const [directInputError, setDirectInputError] = useState("");
   const [imageSearchChordName, setImageSearchChordName] = useState<string | undefined>();
+  const [selectedMemoFavorite, setSelectedMemoFavorite] = useState<string | undefined>();
   const selectedRoot = useChordStore((state) => state.selectedRoot);
   const selectedQualityId = useChordStore((state) => state.selectedQualityId);
   const activeTab = useChordStore((state) => state.activeTab);
   const favorites = useChordStore((state) => state.favorites);
+  const favoriteVoicings = useChordStore((state) => state.favoriteVoicings);
   const recent = useChordStore((state) => state.recent);
   const isLeftHanded = useChordStore((state) => state.isLeftHanded);
   const setRoot = useChordStore((state) => state.setRoot);
@@ -247,12 +251,32 @@ export function ChordFinderApp() {
   const setGroup = useChordStore((state) => state.setGroup);
   const setActiveTab = useChordStore((state) => state.setActiveTab);
   const toggleLeftHanded = useChordStore((state) => state.toggleLeftHanded);
+  const toggleFavorite = useChordStore((state) => state.toggleFavorite);
   const addRecent = useChordStore((state) => state.addRecent);
 
   const selectedQuality = findQuality(selectedQualityId);
   const chordName = buildChordName(selectedRoot, selectedQuality);
   const googleImageSearchUrl = buildGoogleImageSearchUrl(chordName);
   const showImageSearch = imageSearchChordName === chordName;
+  const selectedFavoriteName =
+    selectedMemoFavorite && favorites.includes(selectedMemoFavorite)
+      ? selectedMemoFavorite
+      : favorites[0];
+  const favoriteItems = useMemo(
+    () =>
+      favorites.map((favorite) => {
+        const savedVoicing = favoriteVoicings[favorite];
+        const voicing =
+          savedVoicing ?? chordVoicings.find((candidate) => candidate.chordName === favorite);
+
+        return {
+          name: favorite,
+          sourceLabel: savedVoicing ? "저장 운지" : voicing ? "대표 운지" : "운지 없음",
+          voicing,
+        };
+      }),
+    [favoriteVoicings, favorites],
+  );
 
   const voicings = useMemo(() => {
     const filteredVoicings = filterVoicings({
@@ -279,6 +303,13 @@ export function ChordFinderApp() {
   }, [selectedQualityId, selectedRoot]);
 
   const groupedVoicings = useMemo(() => groupVoicingsBySection(voicings), [voicings]);
+  const selectedFavoriteVoicing = useMemo(() => {
+    if (!selectedFavoriteName) {
+      return undefined;
+    }
+
+    return favoriteItems.find((item) => item.name === selectedFavoriteName)?.voicing;
+  }, [favoriteItems, selectedFavoriteName]);
 
   useEffect(() => {
     addRecent(chordName);
@@ -316,6 +347,14 @@ export function ChordFinderApp() {
     setQualityId(selection.quality.id);
     setGroup(getQualityTab(selection.quality));
     setActiveTab("forward");
+  }
+
+  function handleDeleteFavorite(favorite: string) {
+    if (selectedFavoriteName === favorite) {
+      setSelectedMemoFavorite(undefined);
+    }
+
+    toggleFavorite(favorite);
   }
 
   return (
@@ -506,29 +545,7 @@ export function ChordFinderApp() {
           </main>
         ) : (
           <main className="mt-5 flex-1">
-            {activeTab === "reverse" ? (
-              <div className="rounded-[8px] border border-white/10 bg-[#17201e] p-6">
-                <div className="grid size-12 place-items-center rounded-[8px] bg-white/[0.06] text-[#5eead4]">
-                  <RotateCcw className="size-5" />
-                </div>
-                <h2 className="mt-4 text-2xl font-semibold text-[#f6f0e6]">Reverse</h2>
-                <p className="mt-2 text-sm leading-6 text-[#d8d0c0]">
-                  직접 누른 운지로 코드명을 찾는 기능은 준비 중입니다.
-                </p>
-                <div className="mt-5 grid grid-cols-6 gap-2">
-                  {["E", "A", "D", "G", "B", "E"].map((stringName, index) => (
-                    <button
-                      key={`${stringName}-${index}`}
-                      type="button"
-                      disabled
-                      className="h-16 rounded-[8px] border border-dashed border-white/10 bg-white/[0.03] text-sm font-semibold text-[#7f9188]"
-                    >
-                      {stringName}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ) : null}
+            {activeTab === "reverse" ? <ReverseChordFinder /> : null}
 
             {activeTab === "memo" ? (
               <div className="grid gap-4 xl:grid-cols-2">
@@ -541,16 +558,55 @@ export function ChordFinderApp() {
                   </div>
                   <div className="mt-4 grid gap-2">
                     {favorites.length > 0 ? (
-                      favorites.map((favorite) => (
-                        <button
+                      favoriteItems.map(({ name: favorite, sourceLabel, voicing }) => (
+                        <div
                           key={favorite}
-                          type="button"
-                          onClick={() => selectChordName(favorite)}
-                          className="flex h-12 items-center justify-between rounded-[8px] border border-white/10 bg-white/[0.04] px-3 text-left font-semibold text-[#f6f0e6] transition hover:border-[#ff8a65]/50"
+                          className={`grid grid-cols-[96px_minmax(0,1fr)_40px] gap-2 rounded-[8px] border p-2 transition sm:grid-cols-[112px_minmax(0,1fr)_42px] ${
+                            selectedFavoriteName === favorite
+                              ? "border-[#ff8a65]/75 bg-[#ff8a65]/15 text-[#f6f0e6]"
+                              : "border-white/10 bg-white/[0.04] text-[#f6f0e6] hover:border-[#ff8a65]/50"
+                          }`}
                         >
-                          {favorite}
-                          <ChevronRight className="size-4 text-[#92a49b]" />
-                        </button>
+                          <div className="min-w-0">
+                            {voicing ? (
+                              <ChordDiagram
+                                voicing={voicing}
+                                isLeftHanded={isLeftHanded}
+                                size="compact"
+                                className="border-white/10 bg-[#0f1715] shadow-none"
+                              />
+                            ) : (
+                              <div className="grid aspect-[236/272] place-items-center rounded-[8px] border border-dashed border-white/10 bg-black/20 p-2 text-center text-xs leading-5 text-[#92a49b]">
+                                운지 없음
+                              </div>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedMemoFavorite(favorite)}
+                            className="flex min-h-[112px] min-w-0 flex-col items-start justify-center gap-2 rounded-[7px] px-2 text-left transition hover:bg-white/[0.04]"
+                          >
+                            <span className="max-w-full truncate text-xl font-semibold leading-tight">
+                              {favorite}
+                            </span>
+                            <span className="rounded-[6px] bg-white/[0.06] px-2 py-1 text-xs font-semibold text-[#aeb8ad]">
+                              {sourceLabel}
+                            </span>
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#ffb199]">
+                              선택
+                              <ChevronRight className="size-3.5" />
+                            </span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteFavorite(favorite)}
+                            aria-label={`${favorite} 즐겨찾기 삭제`}
+                            title="즐겨찾기 삭제"
+                            className="grid min-h-[112px] place-items-center rounded-[7px] border border-white/10 text-[#aeb8ad] transition hover:bg-[#ff8a65]/15 hover:text-[#ffb199]"
+                          >
+                            <Trash2 className="size-4" />
+                          </button>
+                        </div>
                       ))
                     ) : (
                       <p className="rounded-[8px] bg-white/[0.04] p-3 text-sm text-[#d8d0c0]">
@@ -558,6 +614,27 @@ export function ChordFinderApp() {
                       </p>
                     )}
                   </div>
+                  {selectedFavoriteVoicing ? (
+                    <div className="mt-4 rounded-[8px] border border-[#ff8a65]/30 bg-[#111817] p-3">
+                      <div className="mb-2 flex items-center justify-between gap-2">
+                        <div className="min-w-0">
+                          <p className="truncate text-lg font-semibold text-[#f6f0e6]">
+                            {selectedFavoriteVoicing.chordName}
+                          </p>
+                          <p className="mt-0.5 text-xs text-[#aeb8ad]">저장 운지</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => selectChordName(selectedFavoriteVoicing.chordName)}
+                          className="inline-flex h-8 shrink-0 items-center gap-1 rounded-[7px] border border-white/10 bg-white/[0.06] px-2 text-xs font-semibold text-[#efe8dd] transition hover:border-[#5eead4]/60"
+                        >
+                          Forward
+                          <ChevronRight className="size-3.5" />
+                        </button>
+                      </div>
+                      <ChordDiagram voicing={selectedFavoriteVoicing} isLeftHanded={isLeftHanded} />
+                    </div>
+                  ) : null}
                 </section>
 
                 <section className="rounded-[8px] border border-white/10 bg-[#17201e] p-5">
