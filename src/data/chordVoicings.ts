@@ -58,6 +58,7 @@ const qualityLabels: Record<string, string> = {
   "slash-ce": "/E",
   "slash-gb": "/B",
   "slash-acsharp": "/C#",
+  "slash-egsharp": "/G#",
 };
 
 type VoicingSeed = Omit<
@@ -1976,6 +1977,29 @@ const curatedVoicings: ChordVoicing[] = [
     isRecommendedForBeginner: true,
     description: "A 코드에 C# 베이스를 둔 상승 진행용 분수코드입니다.",
   } as VoicingSeed),
+  v({
+    id: "e-over-gsharp",
+    root: "E",
+    qualityId: "slash-egsharp",
+    startFret: 1,
+    frets: [4, "x", 2, 1, 0, 0],
+    fingers: [4, "x", 2, 1, 0, 0],
+    rootStrings: [2, 5],
+    voicingType: "open",
+    difficulty: "normal",
+    useCase: ["beginner", "solo", "worship"],
+    includedDegrees: ["3 in bass", "1", "5"],
+    omittedDegrees: [],
+    hasRoot: true,
+    hasThird: true,
+    hasFifth: true,
+    hasSeventh: false,
+    hasTension: false,
+    collisionRisk: "low",
+    isRecommendedForBeginner: true,
+    description: "E 코드에 G# 베이스를 둬 A나 F#m으로 자연스럽게 이어지는 분수코드입니다.",
+    caution: "5번 줄은 뮤트하면 베이스 라인이 더 선명합니다.",
+  }),
 ];
 
 const baseVoicings = [...curatedVoicings, ...makeMovableVoicings()];

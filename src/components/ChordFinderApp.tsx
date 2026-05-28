@@ -15,6 +15,7 @@ import { BottomTabs } from "@/components/BottomTabs";
 import { ChordDiagram } from "@/components/ChordDiagram";
 import { ChordQualitySelector } from "@/components/ChordQualitySelector";
 import { ChordRootSelector } from "@/components/ChordRootSelector";
+import { OpenChordLibrary } from "@/components/OpenChordLibrary";
 import { ReverseChordFinder } from "@/components/ReverseChordFinder";
 import { VoicingCard } from "@/components/VoicingCard";
 import { chordQualities, getQualityTab } from "@/data/chordQualities";
@@ -546,6 +547,8 @@ export function ChordFinderApp() {
         ) : (
           <main className="mt-5 flex-1">
             {activeTab === "reverse" ? <ReverseChordFinder /> : null}
+
+            {activeTab === "open" ? <OpenChordLibrary /> : null}
 
             {activeTab === "memo" ? (
               <div className="grid gap-4 xl:grid-cols-2">

@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, Compass, RotateCcw, Settings } from "lucide-react";
+import { BookOpen, Compass, Guitar, RotateCcw, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useChordStore } from "@/store/chordStore";
 import type { TabId } from "@/types/chord";
@@ -8,6 +8,7 @@ import type { TabId } from "@/types/chord";
 const tabs: Array<{ id: TabId; label: string; icon: typeof Compass }> = [
   { id: "forward", label: "Forward", icon: Compass },
   { id: "reverse", label: "Reverse", icon: RotateCcw },
+  { id: "open", label: "Open", icon: Guitar },
   { id: "memo", label: "Memo", icon: BookOpen },
   { id: "settings", label: "Setting", icon: Settings },
 ];
@@ -21,7 +22,7 @@ export function BottomTabs() {
       aria-label="Primary"
       className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-[#0e1514]/95 px-3 py-2 backdrop-blur md:sticky md:bottom-auto md:top-0 md:rounded-[8px] md:border"
     >
-      <div className="mx-auto grid max-w-4xl grid-cols-4 gap-1">
+      <div className="mx-auto grid max-w-4xl grid-cols-5 gap-1">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (

@@ -35,7 +35,7 @@ export type VoicingType =
 
 export type UseCase = "beginner" | "solo" | "band" | "worship" | "advanced";
 
-export type TabId = "forward" | "reverse" | "memo" | "settings";
+export type TabId = "forward" | "reverse" | "open" | "memo" | "settings";
 
 export type ChordQuality = {
   id: string;
